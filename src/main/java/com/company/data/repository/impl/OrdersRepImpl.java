@@ -4,17 +4,19 @@ import com.company.data.entity.Orders;
 import com.company.data.repository.OrdersRep;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository("ordersRep")
+@RequiredArgsConstructor
 public class OrdersRepImpl implements OrdersRep {
     private static final String GET_ALL = """
             FROM Orders 
             """;
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    private final EntityManager entityManager;
 
     @Override
     public Orders findById(Long id) {

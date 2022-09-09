@@ -3,12 +3,13 @@ package com.company.data.repository.impl;
 import com.company.data.entity.OrdersItems;
 import com.company.data.repository.OrderItemRep;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository("orderItemRep")
+@RequiredArgsConstructor
 public class OrderItemRepImpl implements OrderItemRep {
     public static final String GET_COUNT = """
             SELECT count(*) 
@@ -17,8 +18,8 @@ public class OrderItemRepImpl implements OrderItemRep {
     private static final String GET_ALL = """
             FROM OrdersItems 
             """;
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    private final EntityManager entityManager;
 
     @Override
     public OrdersItems findById(Long id) {

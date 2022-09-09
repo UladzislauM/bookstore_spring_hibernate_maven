@@ -3,14 +3,15 @@ package com.company.data.repository.impl;
 import com.company.data.entity.Books;
 import com.company.data.repository.BookRep;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
 @Repository("bookRep")
+@RequiredArgsConstructor
 public class BookRepImpl implements BookRep {
     public static final String GET_COUNT = """
             SELECT count(*) 
@@ -26,8 +27,8 @@ public class BookRepImpl implements BookRep {
             SET deleted = true 
             WHERE id = :id
             """;
-    @PersistenceContext
-    private EntityManager entityManager;
+
+    private final EntityManager entityManager;
 
     @Override
     public Books findById(Long id) {

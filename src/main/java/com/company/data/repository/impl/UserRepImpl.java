@@ -3,12 +3,13 @@ package com.company.data.repository.impl;
 import com.company.data.repository.UserRep;
 import com.company.data.entity.User;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository("userRep")
+@RequiredArgsConstructor
 public class UserRepImpl implements UserRep {
     public static final String GET_COUNT = """
             SELECT count(*) 
@@ -19,8 +20,7 @@ public class UserRepImpl implements UserRep {
             FROM User 
             """;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Override
     public User findById(Long id) {
